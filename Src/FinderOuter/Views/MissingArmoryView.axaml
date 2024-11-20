@@ -1,0 +1,53 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:FinderOuter.ViewModels;assembly=FinderOuter"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:CompileBindings="True"
+             x:DataType="vm:MissingArmoryViewModel"
+             x:Class="FinderOuter.Views.MissingArmoryView">
+  <Design.DataContext>
+    <vm:MissingArmoryViewModel/>
+  </Design.DataContext>
+
+  <Grid ColumnDefinitions="*,auto" RowDefinitions="*,auto">
+    <TextBox Text="{Binding Input}"
+             Watermark="Armory recovery phrase"
+             AcceptsReturn="True"
+             Grid.Column="0"
+             Grid.Row="0"/>
+    <Button Classes="Help"
+            CommandParameter="{Binding InputKb}"
+            Grid.Column="0"
+            Grid.Row="0"/>
+
+    <TextBox Text="{Binding CompareInput}"
+             Watermark="Additional data to check against (private key, public key or address)"
+             Grid.Column="0"
+             Grid.Row="1"/>
+    <Button Classes="Help"
+            CommandParameter="{Binding ExtraInputKb}"
+            Grid.Column="0"
+            Grid.Row="1"/>
+
+    <ComboBox ItemsSource="{Binding MissingChars}"
+              SelectedItem="{Binding SelectedMissingChar}"
+              ToolTip.Tip="{Binding MissingToolTip}"
+              Margin="1"
+              VerticalAlignment="Top"
+              Grid.Column="1"
+              Grid.Row="0"/>
+    <ComboBox ItemsSource="{Binding CompareInputTypeList}"
+              SelectedItem="{Binding SelectedCompareInputType}"
+              Grid.Column="1"
+              Grid.Row="1">
+      <ComboBox.ItemTemplate>
+        <DataTemplate>
+          <TextBlock Text="{Binding Value}"
+                     ToolTip.Tip="{Binding Description}"/>
+        </DataTemplate>
+      </ComboBox.ItemTemplate>
+    </ComboBox>
+  </Grid>
+</UserControl>
